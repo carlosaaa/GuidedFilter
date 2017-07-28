@@ -12,8 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ded33c95-ab8d-4e40-9369-00935fc67c8d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DataBase.h" afterPath="$PROJECT_DIR$/src/DataBase.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -32,7 +32,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="171">
@@ -68,9 +68,10 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="156" column="61" lean-forward="false" selection-start-line="156" selection-start-column="61" selection-end-line="156" selection-end-column="61" />
+            <state relative-caret-position="256">
+              <caret line="162" column="8" lean-forward="false" selection-start-line="162" selection-start-column="8" selection-end-line="162" selection-end-column="8" />
               <folding>
+                <element signature="e#0#17#0" expanded="true" />
                 <element signature="e#926#935#0" expanded="true" />
                 <element signature="e#2301#2310#0" expanded="true" />
               </folding>
@@ -81,8 +82,8 @@
       <file leaf-file-name="Matrix.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Matrix.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="874">
-              <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+            <state relative-caret-position="727">
+              <caret line="368" column="26" lean-forward="false" selection-start-line="368" selection-start-column="26" selection-end-line="368" selection-end-column="26" />
               <folding>
                 <element signature="e#44#62#0" expanded="true" />
               </folding>
@@ -100,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataBase.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DataBase.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DataBase.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="45" column="46" lean-forward="false" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+            <state relative-caret-position="271">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -122,9 +123,9 @@
         <option value="$PROJECT_DIR$/Matrix.h" />
         <option value="$PROJECT_DIR$/src/Matrix.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/src/DataBase.h" />
-        <option value="$PROJECT_DIR$/src/Matrix.h" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
+        <option value="$PROJECT_DIR$/src/Matrix.h" />
+        <option value="$PROJECT_DIR$/src/DataBase.h" />
       </list>
     </option>
   </component>
@@ -442,7 +443,7 @@
       <workItem from="1500413790639" duration="618000" />
       <workItem from="1501099325584" duration="1389000" />
       <workItem from="1501272963741" duration="5194000" />
-      <workItem from="1501283605672" duration="316000" />
+      <workItem from="1501283605672" duration="1292000" />
     </task>
     <task id="LOCAL-00001" summary="init0508">
       <created>1500412863004</created>
@@ -479,11 +480,25 @@
       <option name="project" value="LOCAL" />
       <updated>1501283910365</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="idea">
+      <created>1501283934721</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1501283934721</updated>
+    </task>
+    <task id="LOCAL-00007" summary="modibug">
+      <created>1501284607916</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1501284607916</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10543000" />
+    <option name="totallyTimeSpent" value="11519000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -503,7 +518,7 @@
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61922365" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271719" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6543438" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4731978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14389652" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3988827" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -564,7 +579,8 @@
     <MESSAGE value="init0508" />
     <MESSAGE value="移动EasyBMP目录" />
     <MESSAGE value="idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="idea" />
+    <MESSAGE value="modibug" />
+    <option name="LAST_COMMIT_MESSAGE" value="modibug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -631,6 +647,7 @@
         <state relative-caret-position="2964">
           <caret line="156" column="61" lean-forward="false" selection-start-line="156" selection-start-column="61" selection-end-line="156" selection-end-column="61" />
           <folding>
+            <element signature="e#0#17#0" expanded="true" />
             <element signature="e#926#935#0" expanded="true" />
             <element signature="e#2301#2310#0" expanded="true" />
           </folding>
@@ -679,6 +696,7 @@
         <state relative-caret-position="4773">
           <caret line="129" column="0" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="129" selection-end-column="0" />
           <folding>
+            <element signature="e#0#17#0" expanded="true" />
             <element signature="e#926#935#0" expanded="true" />
             <element signature="e#2301#2310#0" expanded="true" />
           </folding>
@@ -698,6 +716,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#17#0" expanded="true" />
             <element signature="e#926#935#0" expanded="true" />
             <element signature="e#2301#2310#0" expanded="true" />
           </folding>
@@ -738,6 +757,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#17#0" expanded="true" />
             <element signature="e#926#935#0" expanded="true" />
             <element signature="e#2301#2310#0" expanded="true" />
           </folding>
@@ -778,6 +798,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#17#0" expanded="true" />
             <element signature="e#926#935#0" expanded="true" />
             <element signature="e#2301#2310#0" expanded="true" />
           </folding>
@@ -862,39 +883,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataBase.h">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="45" column="46" lean-forward="false" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+        <state relative-caret-position="171">
+          <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Matrix.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
-          <folding>
-            <element signature="e#44#62#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="156" column="61" lean-forward="false" selection-start-line="156" selection-start-column="61" selection-end-line="156" selection-end-column="61" />
+        <state relative-caret-position="256">
+          <caret line="162" column="8" lean-forward="false" selection-start-line="162" selection-start-column="8" selection-end-line="162" selection-end-column="8" />
           <folding>
+            <element signature="e#0#17#0" expanded="true" />
             <element signature="e#926#935#0" expanded="true" />
             <element signature="e#2301#2310#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/src/Matrix.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+        <state relative-caret-position="727">
+          <caret line="368" column="26" lean-forward="false" selection-start-line="368" selection-start-column="26" selection-end-line="368" selection-end-column="26" />
+          <folding>
+            <element signature="e#44#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataBase.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>

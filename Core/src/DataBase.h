@@ -27,9 +27,9 @@ public:
         m_w = m_matrix.Width();
         m_n = n;
 
-        printf("DataBase = %d\n", sizeof(Position)*m_h*m_w*m_n);
+        printf("Database = %d\n", sizeof(Position)*m_h*m_w*m_n);
         m_data = new Position[m_h * m_w * m_n];
-        printf("OK DataBase = %d\n", sizeof(Position)*m_h*m_w*m_n);
+        printf("OK Database = %d\n", sizeof(Position)*m_h*m_w*m_n);
     }
 
     ~DataBase()
@@ -64,7 +64,7 @@ public:
                         int sx = i + m - r2;
                         int sy = j + n - r2;
                         int ex = i + m + r2;
-                        int ey = i + n + r2;
+                        int ey = j + n + r2;
 
                         if (sx >= 0 && sy >=0 && ex < m_h && ey < m_w)
                         {
