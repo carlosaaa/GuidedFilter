@@ -1,21 +1,22 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
-#include "EasyBMP.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "EasyBMP.h"
 
-
-#ifdef OMP
-#pragma omp parallel for
-#else
-#endif
-
-
-struct Pixel
+class Pixel
 {
+public:
+    double r;
+    double g;
+    double b;
+
+public:
     static Pixel Zero;
 
+public:
     Pixel(){ r=g=b=0;}
     Pixel(double r, double g, double b)
     {
@@ -23,18 +24,47 @@ struct Pixel
         this->g = g;
         this->b = b;
     }
-    
-    double r;
-    double g;
-    double b;
+
+    ebmpBYTE r255() {return round(r*255);}
+    ebmpBYTE g255() {return round(g*255);}
+    ebmpBYTE b255() {return round(b*255);}
+
+    void log()
+    {
+        printf("%f,%f,%f ", b, g, r);
+    }
 
     friend Pixel operator - (const Pixel& a, const Pixel& b)
     {
-        return Pixel(a.r - b.r,
-        a.g - b.g,
-        a.b - b.b);
+        return Pixel(a.r - b.r, a.g - b.g, a.b - b.b);
     }
 
+    friend Pixel operator * (const Pixel& a, double b)
+    {
+        return Pixel(a.r * b, a.g * b, a.b * b);
+    }
+
+    static Pixel distance (const Pixel& a, const Pixel& b )
+    {
+        return Pixel( (a.r-b.r)*(a.r-b.r),
+                      (a.g-b.g)*(a.g-b.g),
+                      (a.b-b.b)*(a.b-b.b));
+    }
+
+    Pixel& operator = (double v)
+    {
+        r = g = b = v;
+        return *this;
+    }
+
+    Pixel&operator += (double v)
+    {
+        r += v;
+        g += v;
+        b += v;
+
+        return *this;
+    }
     Pixel& operator += (const Pixel& other)
     {
         r+=other.r;
@@ -44,14 +74,6 @@ struct Pixel
         return *this;
     }
     
-    Pixel& operator += (double eps)
-    {
-        r+=eps;
-        g+=eps;
-        b+=eps;
-
-        return *this;
-    }
     Pixel& operator -= (const Pixel& other)
     {
         r-=other.r;
@@ -87,10 +109,11 @@ struct Pixel
     }
 };
 
-Pixel Pixel::Zero = Pixel(0,0,0);
+class DataBase;
 
 struct Matrix
 {
+    friend class DataBase;
 private:
     int m_h;
     int m_w;
@@ -120,14 +143,11 @@ public:
         p = NULL;
         init(other.m_h, other.m_w, other.m_isGray);
 
-    //int begin = clock();
-       // memcpy(p, other.p, sizeof(Pixel)*m_h*m_w);
-       #pragma omp parallel for
-        for (int i = 0; i < m_h*m_w; i++)
-        {
-            p[i] = other.p[i];
-        }
-     //   printf("memcpy1 %d\n", clock()-begin);
+        memcpy(p, other.p, sizeof(Pixel)*m_h*m_w);
+//        for (int i = 0; i < m_h*m_w; i++)
+//        {
+//            p[i] = other.p[i];
+//        }
     }
     Matrix& operator = (const Matrix& ref)
     {
@@ -137,23 +157,19 @@ public:
         }
         
         init(ref.m_h, ref.m_w, ref.m_isGray);
-     //   int begin = clock();
-        //memcpy(p, ref.p, sizeof(Pixel)*m_h*m_w);
 
-        #pragma omp parallel for
+
         for (int i = 0; i < m_h*m_w; i++)
         {
             p[i] = ref.p[i];
         }
 
         
-      //  printf("memcpy2 %d\n", clock()-begin);
         return *this;
     }
 
     Matrix& operator += (const Matrix& v)
     {
-        #pragma omp parallel for
         for (int pos = 0; pos < m_h*m_w; pos++)
         {
             p[pos] += v.p[pos];
@@ -163,27 +179,19 @@ public:
     }
     Matrix& operator += (double eps)
     {
-    #pragma omp parallel for
         for (int pos = 0; pos < m_h*m_w; pos++)
         {
-        //if (pos ==m_h*m_w/7 ||pos ==m_h*m_w/7*2|| pos ==m_h*m_w/7*3||pos ==m_h*m_w/7*4||pos ==m_h*m_w/5||pos ==m_h*m_w/7*6)
-        //{
-        //    printf("pos(%d) %d %d %d\n", pos, omp_get_num_threads(),  omp_get_max_threads(),  omp_get_thread_num() );
-        //}
-
-        p[pos] += eps;
+            p[pos] += eps;
         }
         return *this;
     }
 
     Matrix& operator *= (const Matrix& v)
     {
-    #pragma omp parallel for
         for (int pos = 0; pos < m_h*m_w; pos++)
         {
             p[pos] *= v.p[pos];
         }
-
 
         return *this;
     }
@@ -209,9 +217,6 @@ public:
     }
     Matrix& operator -= (const Matrix& v)
     {
-    
-    
-    #pragma omp parallel for
         for (int pos = 0; pos < m_h*m_w; pos++)
         {
             p[pos] -= v.p[pos];
@@ -231,8 +236,7 @@ public:
     }
     friend Matrix operator - (const Matrix& a, const Matrix& b)
     {
-    Matrix r(a);
-        
+        Matrix r(a);
         return r -= b;
     }
     friend Matrix operator * (const Matrix& a, const Matrix& b)
@@ -257,10 +261,7 @@ public:
     }
     ~Matrix()
     {
-
-        if (p)
-            free(p); 
-
+        if (p) free(p);
     }
 
     bool toBMP(BMP& bmp) const
@@ -275,9 +276,9 @@ public:
                 Pixel p = get(h, w);
             
                 RGBApixel temp;
-                temp.Red = round(p.r*255);
-                temp.Green = round(p.g*255);
-                temp.Blue = round(p.b*255);
+                temp.Red = p.r255();
+                temp.Green = p.g255();
+                temp.Blue = p.b255();
                 temp.Alpha = 0;
                     
                 bmp.SetPixel(w, h, temp);
@@ -298,7 +299,7 @@ public:
           for( int j=0; j < m_w ; j++ )
           {
               Pixel p = get(i, j);
-              printf("%f,%f,%f ", p.b, p.g, p.r);
+              p.log();
           }
           printf("; -------------\n");
         }
@@ -383,6 +384,25 @@ public:
             }
         }
     }
+
+    void sum(int r2, const DataBase& db);
+
+    void f2(const Matrix& m, int r);
+
+    Pixel distance(int h1, int w1, int h2, int w2, int r) const
+    {
+        Pixel sum;
+        for (int i = -r; i <= r; i++)
+        {
+            for (int j = -r; j <=r ; j++)
+            {
+                const Pixel& a = get(h1 + i, w1 + j);
+                const Pixel& b = get(h2 + i, w2 + j);
+                sum += Pixel::distance(a, b);
+            }
+        }
+        return sum;
+    }
     
 protected:
     const Pixel& get(int i , int j) const
@@ -395,7 +415,7 @@ protected:
         return p[i*m_w+j];
     }
 
-    inline void set(int h, int w, Pixel v)
+    void set(int h, int w, Pixel v)
     {
         p[ h * m_w + w ] = v;
     }
@@ -406,28 +426,18 @@ private:
     Matrix();
 
     
-    void init(int h, int w, bool isGray) {
+    void init(int h, int w, bool isGray)
+    {
         m_h = h;
         m_w = w;
         m_isGray = isGray;
 
         if (p)
         {
-            //delete[] p;
             free(p);
         }
-        //p = new Pixel[m_h*m_w];
-
-     //   int begin = clock();
         p = (Pixel*)malloc(m_h*m_w*sizeof(Pixel));
-
-      //  printf("malloc: %d  \n", clock()-begin);
-    }    
-
-
-
-
-
+    }
 };
 
 #endif /* __MATRIX_H__ */

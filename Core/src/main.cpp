@@ -1,17 +1,9 @@
-#ifdef _OPENMP
-   #include <omp.h>
-#else
-   #define omp_get_thread_num()  (0)
-   #define omp_get_num_threads() (0)
-   #define omp_get_max_threads() (0)  
-   #define omp_set_num_threads(X) 
-#endif
-
 #include <time.h>
 #include "EasyBMP.h"
 #include "Matrix.h"
+#include "DataBase.h"
 
-Matrix box_filter(const Matrix& imSrc, int r)
+Matrix box_filter_origin(const Matrix& imSrc, int r)
 {	
 	Matrix imCum = imSrc;
 	imCum.cum_for_every_h();
@@ -28,8 +20,45 @@ Matrix box_filter(const Matrix& imSrc, int r)
 	return imDst;
 }
 
+Matrix box_filter2(const Matrix& imSrc, int r)
+{
+    Matrix im = imSrc;
+    im.f2(imSrc, r);
+    return im;
+}
+
+class NL_box_filter
+{
+public:
+    NL_box_filter(int w, int r2, int N)
+    {
+        m_r2= r2;
+        m_n = N;
+        m_w = w;
+    }
+
+    Matrix operator() (const Matrix& imSrc, int r) const
+    {
+        (void)r;
+
+        DataBase m_db(imSrc, m_n);
+        m_db.index(m_w, m_r2);
+
+        Matrix dst = imSrc;
+        dst.sum(m_r2, m_db);
+
+        return dst;
+    }
+
+private:
+    int m_r2;
+    int m_n;
+    int m_w;
+};
+
 //.导向滤波彩色图模糊
-Matrix guided_filter(const Matrix& I, const Matrix& p, int r, double eps)
+template <class T>
+Matrix guided_filter(const T& box_filter, const Matrix& I, const Matrix& p, int r, double eps)
 {
 	Matrix m1(p);
 	m1.set_all_value_1();
@@ -43,7 +72,7 @@ Matrix guided_filter(const Matrix& I, const Matrix& p, int r, double eps)
 	mean_I.show("mean_I");
 
 	// mean_p = boxfilter(p, r) ./ N;
-	Matrix mean_p = box_filter(I, r) / N; 
+	Matrix mean_p = box_filter(p, r) / N;
 	mean_p.show("mean_p");
 
 	//mean_Ip = boxfilter(I.*p, r) ./ N;
@@ -82,6 +111,20 @@ Matrix guided_filter(const Matrix& I, const Matrix& p, int r, double eps)
 
 }
 
+template<class T>
+void run(const T& box_filter, const Matrix& guided, const Matrix& input, int r, double eps, const char* pszOutName)
+{
+    int begin = clock();
+    Matrix output = guided_filter(box_filter, guided, input, r, eps);
+    int end = clock();
+
+    printf("begin = %d\n  end = %d\n elapsed_time = %d ms\n", begin,end,end-begin);
+    output.show("output");
+    BMP bmp_out;
+    output.toBMP(bmp_out);
+
+    bmp_out.WriteToFile(pszOutName);
+}
 
 int main(int argc, char* argv[])
 {
@@ -110,20 +153,33 @@ int main(int argc, char* argv[])
 
 	int r = 4;
 	double eps = 0.01;
-	
-	int begin = clock();
-	Matrix output = guided_filter(guided, input, r, eps);
-	int end = clock();
 
-	printf("%d %d %d\n", begin , end, end-begin);
-	output.show("output");
+    run(box_filter_origin, guided, input, r, eps, "out.bmp");
+    run(box_filter2, guided,input,r,eps,"out2.bmp");
 
-	BMP bmp_out;
-	output.toBMP(bmp_out);
 
-	bmp_out.WriteToFile("out.bmp");
-		
-	return 0;
+    if (0)
+    {
+        int N = 0;
+        int r2 = 3;
+        int w = 4;
+
+        int begin = clock();
+        NL_box_filter nl_box_filter(w, r2,N);
+        Matrix output = guided_filter(nl_box_filter, guided, input, r, eps);
+        int end = clock();
+
+        printf("begin = %d\n   end=%d\n elapsed_time =  %d ms\n", begin, end, end - begin);
+        output.show("output");
+
+        BMP bmp_out;
+        output.toBMP(bmp_out);
+
+        bmp_out.WriteToFile("out.bmp");
+
+        return 0;
+
+    }
 }
 
 
