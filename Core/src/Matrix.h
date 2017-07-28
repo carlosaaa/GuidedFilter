@@ -207,7 +207,6 @@ public:
     
     Matrix& operator /= (const Matrix& v)
     {
-    #pragma omp parallel for
         for (int pos = 0; pos < m_h*m_w; pos++)
         {
             p[pos] /= v.p[pos];
@@ -345,7 +344,7 @@ public:
         for (int pos = 0; pos < m_h*m_w; pos++)
         {
             Pixel& t = p[pos];
-            t.r = t.g = t.b = 1;
+            t = 1;
         }
     }
 

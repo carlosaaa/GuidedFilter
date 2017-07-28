@@ -29,7 +29,7 @@ public:
 
         printf("DataBase = %d\n", sizeof(Position)*m_h*m_w*m_n);
         m_data = new Position[m_h * m_w * m_n];
-        printf("OK Database = %d\n", sizeof(Position)*m_h*m_w*m_n);
+        printf("OK DataBase = %d\n", sizeof(Position)*m_h*m_w*m_n);
     }
 
     ~DataBase()
@@ -41,7 +41,8 @@ public:
     Pixel getSum(int i, int j) const
     {
         Pixel p;
-        for (int k = 0; k < m_n; ++k) {
+        for (int k = 0; k < m_n; k++)
+        {
             const Position& pos = get(i,j,k);
             p.r += m_matrix.get(pos.rh, pos.rw).r;
             p.g += m_matrix.get(pos.gh, pos.gw).g;
@@ -120,20 +121,20 @@ private:
         if (d.g < maxValueG)
         {
             m_data[maxPosG].value.g = d.g;
-            m_data[maxPosG].rh = newI;
-            m_data[maxPosG].rw = newJ;
+            m_data[maxPosG].gh = newI;
+            m_data[maxPosG].gw = newJ;
         }
-        if (d.b < maxPosB)
+        if (d.b < maxValueB)
         {
             m_data[maxPosB].value.b = d.b;
-            m_data[maxPosB].rh = newI;
-            m_data[maxPosB].rw = newJ;
+            m_data[maxPosB].bh = newI;
+            m_data[maxPosB].bw = newJ;
         }
 
     }
 
 private:
-    const Matrix m_matrix;
+    const Matrix& m_matrix;
     int m_h;
     int m_w;
     int m_n;

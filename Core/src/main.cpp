@@ -160,7 +160,7 @@ int main(int argc, char* argv[])
 
     if (0)
     {
-        int N = 0;
+        int N = 9;
         int r2 = 3;
         int w = 4;
 
@@ -177,9 +177,10 @@ int main(int argc, char* argv[])
 
         bmp_out.WriteToFile("out.bmp");
 
-        return 0;
+
 
     }
+    return 0;
 }
 
 
