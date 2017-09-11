@@ -1,29 +1,14 @@
 package github.easabella;
 
-/*
- * JDialogAbout.java    00:14, April 08, 2009
- *
- * Copyright 2009, FreeInternals.org. All rights reserved.
- * Use is subject to license terms.
- */
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- *
- * @author Amos Shi
- * @since JDK 6.0
- */
+
 class JDialogAbout extends JDialog {
 
     private static final long serialVersionUID = 4876543219876500000L;
 
-    /**
-     *
-     * @param owner Owner window
-     * @param title Title for the Dialog
-     */
     public JDialogAbout(final Frame owner, final String title) {
         super(owner, title);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -44,36 +29,39 @@ class JDialogAbout extends JDialog {
         final JPanel listPane = new JPanel();
         listPane.setLayout(new BoxLayout(listPane, BoxLayout.PAGE_AXIS));
 
-        final JLabel label = new JLabel("Java Class Viewer");
+        final JLabel label = new JLabel("Guilded Filter UI");
         label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+
         listPane.add(label);
         listPane.add(Box.createRigidArea(new Dimension(0, 5)));
         listPane.add(new JLabelHyperLink(
-                "for Java Virtual Machine Specification 8",
+                "111",
                 "https://docs.oracle.com/javase/specs/jvms/se8/html/"));
         listPane.add(Box.createRigidArea(new Dimension(0, 5)));
-        listPane.add(new JLabel("Author: Amos Shi"));
+        listPane.add(new JLabel("Author: Easabella"));
         listPane.add(Box.createRigidArea(new Dimension(0, 20)));
         listPane.add(new JLabelHyperLink(
-                "https://github.com/amosshi/freeinternals/",
-                "https://github.com/amosshi/freeinternals/"));
+                "222",
+                "https://github.com/easabella/GuidedFilter"));
         listPane.add(Box.createRigidArea(new Dimension(0, 5)));
-        listPane.add(new JLabel("Free Tools to reach the Internals"));
+        listPane.add(new JLabel("333"));
         listPane.add(Box.createRigidArea(new Dimension(0, 5)));
-        //listPane.add(new JLabel("Based on: Java Class File Library, 2.0.161"));
-        listPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        listPane.setBorder(//BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                BorderFactory.createLineBorder(Color.BLACK));
 
 //      Lay out the buttons from left to right.
         final JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
-        buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        buttonPane.setBorder(//BorderFactory.createEmptyBorder(0, 10, 10, 10));
+                BorderFactory.createLineBorder(Color.RED));
         buttonPane.add(Box.createHorizontalGlue());
         buttonPane.add(buttonClose);
 
 //      Put everything together, using the content pane's BorderLayout.
         final Container contentPane = this.getContentPane();
-        contentPane.add(listPane, BorderLayout.CENTER);
-        contentPane.add(buttonPane, BorderLayout.PAGE_END);
+        contentPane.add(listPane, BorderLayout.NORTH);
+        contentPane.add(buttonPane, BorderLayout.SOUTH);
 
     }
 
